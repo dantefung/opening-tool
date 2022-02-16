@@ -393,7 +393,7 @@ under the License.
             <repositories>
                 <repository>
                     <id>maven-nexus</id>
-                    <url>https://nexus.utopaos.cn/repository/maven-public/</url>
+                    <url>https://nexus.xxs.cn/repository/maven-public/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
@@ -407,7 +407,7 @@ under the License.
             <pluginRepositories>
                 <pluginRepository>
                     <id>maven-nexus</id>
-                    <url>https://nexus.utopaos.cn/repository/maven-public/</url>
+                    <url>https://nexus.xxs.cn/repository/maven-public/</url>
                     <releases>
                         <enabled>true</enabled>
                     </releases>
