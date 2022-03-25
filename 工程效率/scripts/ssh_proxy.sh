@@ -6,7 +6,7 @@ then
  echo "SSH Proxy server is on..."
 else
  echo "SSH Proxy server is death..."
- ssh -fgnTN -D 7079 yourusername@yourhostname
+ ./proxy_login.sh 
  if [ $? -eq 0 ]
  then
  echo "SSH Proxy Service restart successd."
