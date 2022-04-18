@@ -6,7 +6,7 @@ mshta vbscript:createobject("shell.application").shellexecute("%~s0","goto :Admi
 :Admin
 
 :: set WSL distribution
-set distribution=Ubuntu-20.04
+set distribution=Ubuntu-18.04
 
 :: 设置WSL初始化脚本位置
 set initWSL=/etc/init.wsl
