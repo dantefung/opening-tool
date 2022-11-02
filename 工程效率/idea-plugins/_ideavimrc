@@ -22,6 +22,12 @@ set history=100000
 " 共享系统粘贴板
 set clipboard=unnamed
 
+" 开启输入法自动切换功能
+" 为IdeaVim插件增加自动切换为英文输入法的功能,
+" idea 需要安装 IdeaVimExtension plugin
+set keep-english-in-normal 
+set keep-english-in-normal-and-restore-in-insert
+
 " clear the highlighted search result
 " (清除高亮)
 nnoremap <Leader>sc :nohlsearch<CR>
