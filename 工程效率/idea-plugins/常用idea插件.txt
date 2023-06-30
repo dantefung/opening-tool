@@ -18,6 +18,8 @@ String Manipulation
 Step Builder Generator
 Translation
 Auto filling Java call arguments
+Custom Postfix Templates
+Java8 Postifx
 
 
 
