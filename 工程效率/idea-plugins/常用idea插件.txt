@@ -18,6 +18,11 @@ String Manipulation
 Step Builder Generator
 Translation
 Auto filling Java call arguments
-
+CodeGeex
+Easy Generate
+Java8 Postfix
+Guava Postfix Completion
+Custom Postfix Templates
+GenerateAllSetter Postfix Completion
 
 
