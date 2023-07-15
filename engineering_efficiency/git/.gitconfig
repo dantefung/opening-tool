@@ -1,0 +1,29 @@
+[user]
+	email = xxx@qq.com
+	name = xyz
+[core]
+	autocrlf = true
+[alias]
+    find-branch = !sh -c \"git branch -a | grep -v remotes | grep $1 | head -n 1 | xargs git checkout\"
+
+    co = checkout 
+
+    ci = commit 
+    
+    st = status 
+    
+    pl = pull 
+    
+    ps = push 
+    
+    dt = difftool 
+    
+    l = log --stat 
+    
+    cp = cherry-pick 
+    
+    ca = commit -a 
+    
+    b = branch
+      
+
