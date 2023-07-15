@@ -1,3 +1,0 @@
-https://github.com/Link-Kou/intellij-mybaitslog
-
-install from disk

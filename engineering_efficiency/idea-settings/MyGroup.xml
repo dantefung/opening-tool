@@ -1,0 +1,288 @@
+<templateSet group="MyGroup">
+  <template name="log4my" value="private static final Logger log = LoggerFactory.getLogger($CLASS$.class);" description="org.slf4j.Logger" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="CLASS" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="logInfo4my1" value="log.info(&quot;$METHOD_NAME$()-&gt;$FORMAT$);" description="prints method parameter names and values" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="FORMAT" expression="groovyScript(&quot; _1.collect { it + ' = {}'}.join(', ') +   '\&quot;,' + _1.collect {it}.join(', ')  &quot;, methodParameters())" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="logRR4my" value="log.info(&quot;$A$-&gt;Req:&quot;);&#10;$SELECTION$&#10;log.info(&quot;$A$-&gt;Res: $EXPR_COPY$ = {}&quot; , $EXPR$);&#10;" description="prints Request and Response" toReformat="true" toShortenFQNames="true">
+    <variable name="A" expression="groovyScript(&quot;def result=''; def params=\&quot;${_1}\&quot;.replaceAll(';', '').split('=').toList(); result=params[1]; return result&quot;, SELECTION)" defaultValue="" alwaysStopAt="true" />
+    <variable name="EXPR" expression="variableOfType(&quot;&quot;)" defaultValue="&quot;expr&quot;" alwaysStopAt="true" />
+    <variable name="EXPR_COPY" expression="escapeString(EXPR)" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mt@TryCatch" value="CallerInfo callerInfo = Profiler.registerInfo(&quot;$CLASS$.$METHOD_NAME$&quot;, Constant.APP_NAME, false, true);&#10;try {&#10;    $SELECTION$&#10;} catch (Exception e) {&#10;    Profiler.functionError(callerInfo);&#10;    log.error(&quot;$CLASS$-&gt;$METHOD_NAME$() error.&quot;,e);&#10;}finally {&#10;    Profiler.registerInfoEnd(callerInfo);&#10;}" description="try...catch" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="mt@Transaction" value="Transaction t = Cat.newTransaction(&quot;$CLASS_NAME$&quot;, &quot;$METHOD_NAME$&quot;);&#10;&#10;try {&#10;    $SELECTION$&#10;    $END$&#10;&#10;     t.setStatus(Transaction.SUCCESS);&#10;} catch (Exception e) {&#10;     LOGGER.error(&quot;$METHOD_NAME$()-&gt;exception:&quot;, e);&#10;        &#10;     Cat.logEvent(CAT_Event_Type, &quot;$METHOD_NAME$&quot;, &quot;fail&quot;);&#10;     Cat.logError(e);&#10;&#10;     t.setStatus(e);&#10;} finally {&#10;     t.complete();&#10;}" description="use Cat Transaction" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS_NAME" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="enum@of2" value=" private final static ImmutableMap&lt;Integer, $CLASS$&gt; codeMap;&#10;&#10;    static{&#10;        ImmutableMap.Builder&lt;Integer, $CLASS$&gt; mapBuilder = ImmutableMap.builder();&#10;        for ($CLASS$ one : $CLASS$.values()) {&#10;            mapBuilder.put(one.getCode(), one);&#10;        }&#10;&#10;        codeMap = mapBuilder.build();&#10;    }&#10;&#10;&#9;/**判断枚举值是否存在*/&#10;    public static boolean isValid(int code){&#10;        return codeMap.containsKey(code);&#10;    }&#10;&#10; /**根据枚举值定位到具体枚举*/&#10; public static $CLASS$ of(Integer code) {&#10;&#9; if(code == null){&#10;&#9;&#9; return null;&#10;&#9; }&#10;&#10;&#9; return codeMap.get(code);&#10; }" description="generate Enum method use ImmutableMap" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="enum@of1" value="/**根据枚举值定位到具体枚举*/&#10;public static $CLASS$ of(Integer code){&#10;        for ($CLASS$ one : $CLASS$.values()) {&#10;            if (one.code == code) {&#10;                return one;&#10;            }&#10;        }&#10;        return null;&#10;}" description="generate of() method" toReformat="true" toShortenFQNames="true">
+    <variable name="CLASS" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="isNotEmpty" value="if ( CollectionUtils.isNotEmpty($collection$) ) {&#10;&#9;&#10;}" description="use CollectionUtils.isNotEmpty()" toReformat="true" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="isEmpty" value="if ( CollectionUtils.isEmpty($collection$) ) {&#10;&#9;&#10;}" description="use CollectionUtils.isEmpty()" toReformat="true" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gmktTransform" value="Lists.transform($ITERABLE_TYPE$, new Function&lt;$ELEMENT_TYPE$, Object&gt;() {&#10;                @Nullable&#10;                @Override&#10;                public Object apply(@Nullable $ELEMENT_TYPE$ $VAR$) {&#10;                &#9;//TODO&#10;                    return ;&#10;                }&#10;            });" description="use Lists.transform()" toReformat="true" toShortenFQNames="true">
+    <variable name="ITERABLE_TYPE" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELEMENT_TYPE" expression="iterableComponentType(ITERABLE_TYPE)" defaultValue="&quot;java.lang.Object&quot;" alwaysStopAt="false" />
+    <variable name="VAR" expression="suggestVariableName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gmktCallableFuture" value=" Callable&lt;$ELEMENT_TYPE$&gt; callable = new Callable&lt;$ELEMENT_TYPE$&gt;() {&#10;                @Override&#10;                public $ELEMENT_TYPE$ call() throws Exception {&#10;                &#9;$SELECTION$&#10;                    return $EXPR$;&#10;                }&#10;            };&#10;&#10;Future&lt;$ELEMENT_TYPE$&gt; future = executorService.submit(callable);//请使用线程池&#10;$ELEMENT_TYPE$ $EXPR$ = future.get(3000, TimeUnit.MILLISECONDS);" description="make method invoked by use Callable" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT_TYPE" expression="groovyScript(&quot;def result=''; def params=\&quot;${_1}\&quot;.replaceAll(', ', ',').split(' ').toList(); result=params[0]; return result&quot;, SELECTION)" defaultValue="" alwaysStopAt="false" />
+    <variable name="EXPR" expression="variableOfType(&quot;&quot;)" defaultValue="expr" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="logInfo4my2" value="log.info(&quot;$METHOD_NAME$()-&gt;$FORMAT$);" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="FORMAT" expression="groovyScript(&quot; _1.collect { it + ' = {}'}.join(', ') +   '\&quot;,' + _1.collect {it}.join(', ')  &quot;, methodParameters())" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gmkt@Service" value="@Slf4j&#10;@Service(&quot;$name$&quot;)&#10;" description="use Spring @Service and @Slf4j" toReformat="true" toShortenFQNames="true">
+    <variable name="name" expression="groovyScript(&quot;def result=''; def str = \&quot;${_1}\&quot;; result=str.substring(0,str.indexOf('Impl')); return result&quot;, decapitalize(className()))" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="gmktMapIteration" value="for (Map.Entry&lt;$keyType$, $valueType$&gt; entry : $SELECTION$.entrySet()) {&#10;&#9;$keyType$ key = entry.getKey();&#10;&#9;$valueType$ value = entry.getValue();&#10;&#9;&#10;}" description="map iteration" toReformat="true" toShortenFQNames="true">
+    <variable name="keyType" expression="iterableComponentType(ArrayOrIterable)" defaultValue="" alwaysStopAt="true" />
+    <variable name="valueType" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gmkt@Lombok" value="@Data&#10;@ToString" description="@Data @ToString" toReformat="true" toShortenFQNames="true" useStaticImport="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="mt@InterfaceDoc" value="@InterfaceDoc(&#10;&#9;&#9;displayName = &quot;$displayName$&quot;,&#10;&#9;&#9;type = &quot;pigeon&quot;,&#10;&#9;&#9;scenarios = &quot;&quot;,&#10;&#9;&#9;description = &quot;&quot;&#10;&#9;)" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="displayName" expression="className()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="mt@MethodDoc" value="@MethodDoc(&#10;&#9;&#9;displayName = &quot;$displayName$&quot;,&#10;&#9;&#9;description = &quot;&quot;,&#10;&#9;&#9;returnValueDescription = &quot;&quot;,&#10;&#9;&#9;parameters = {&#10;&#9;&#9;&#9;&#9;$methodParameters$&#10;&#9;&#9;}&#10;&#9;)" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="displayName" expression="methodName()" defaultValue="" alwaysStopAt="true" />
+    <variable name="methodParameters" expression="groovyScript(&quot; _1.collect { '@ParamDoc(name = \&quot;'+ it + '\&quot;, description =\&quot;\&quot;)'}.join(',\\n\\t\\t\\t\\t') &quot;, methodParameters())" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="gmktIntersection" value="Collection intersection = CollectionUtils.intersection($c1$, $c2$);" description="CollectionUtils.intersection(a,b)" toReformat="true" toShortenFQNames="true">
+    <variable name="c1" expression="iterableVariable()" defaultValue="" alwaysStopAt="false" />
+    <variable name="c2" expression="iterableVariable()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gmktContainsAny" value="boolean isContained = CollectionUtils.containsAny($c1$, $c2$);&#10;" description="CollectionUtils.containsAny(a,b)" toReformat="true" toShortenFQNames="true">
+    <variable name="c1" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <variable name="c2" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="jdps" value="/**  */&#10;private String ;" description="private String" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="jdpl" value="/** */&#10;private long ;" description="private long ;" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="jdpi" value="/** */&#10;private int ;" description="private int ;" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="isNull" value="if (Objects.isNull($obj$)){&#10;            &#10;}" description="Objects.isNull" toReformat="true" toShortenFQNames="true">
+    <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="gmkt@Component" value="@Slf4j&#10;@Component" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="isNON" value="if (Objects.nonNull($obj$)){&#10;            &#10;}" description="Objects.nonNull()" toReformat="false" toShortenFQNames="true">
+    <variable name="obj" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="jdApiResultWrapper" value="apiResultWrapper(&quot;$clazzName$&quot;, &quot;$methodName$&quot;,&#10;        String.format(&quot;$METHOD_NAME$()-&gt;$FORMAT$),&#10;        () -&gt; {&#10;&#10;                return ;&#10;            }&#10;         );" description="apiResultWrapper" toReformat="true" toShortenFQNames="true">
+    <variable name="clazzName" expression="groovyScript(&quot;def result=''; def str = \&quot;${_1}\&quot;; result=str.substring(0,str.indexOf('Impl')); return result&quot;, decapitalize(className()))" defaultValue="" alwaysStopAt="false" />
+    <variable name="methodName" expression="methodName()" defaultValue="" alwaysStopAt="false" />
+    <variable name="METHOD_NAME" expression="methodName()" defaultValue="" alwaysStopAt="false" />
+    <variable name="FORMAT" expression="groovyScript(&quot; _1.collect { it + ' = %s'}.join(', ') +   '\&quot;,' + _1.collect {it}.join(', ')  &quot;, methodParameters())" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="optional.ofNullable2List" value="Optional.ofNullable($collection$)&#10;                .map(list-&gt;list.stream()&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;.map(one-&gt;{})&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;.collect(Collectors.toList()))&#10;                .orElse(Collections.emptyList());" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="optional.ofNullable2Map" value="Optional.ofNullable($collection$)&#10;                   .map(list -&gt; list.stream()&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;.collect(Collectors.toMap(key, one -&gt; one , (key1, key2) -&gt; key1)))&#10;                   .orElse(Collections.emptyMap());" description="" toReformat="false" toShortenFQNames="true" useStaticImport="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="list2Map-1" value="Map&lt;Long, $ELEMENT_TYPE$&gt; map = $collection$.stream().collect(Collectors.toMap($ELEMENT_TYPE$::getId,Function.identity()));&#10;" description="以id为主键转为map" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT_TYPE" expression="guessElementType(collection)" defaultValue="" alwaysStopAt="true" />
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="list2Map-2" value="//给出key重复时，使用哪个key作为主键，以下代码中的(key1, key2) -&gt; key2)代表key1和key2键重复时返回key2做主键&#10;Map&lt;Long, $ELEMENT_TYPE$&gt; map = $collection$.stream().collect(Collectors.toMap($ELEMENT_TYPE$::getId, Function.identity(), (k1, k2) -&gt; k2));" description="重复key处理" toReformat="true" toShortenFQNames="true">
+    <variable name="ELEMENT_TYPE" expression="guessElementType(collection)" defaultValue="" alwaysStopAt="true" />
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="list2Map-3" value="Map&lt;Long, String&gt; map = $collection$.stream().collect(Collectors.toMap($ELEMENT_TYPE$::getX, $ELEMENT_TYPE$::getY, (k1, k2) -&gt; k2));" description="只返回对象里某个属性" toReformat="true" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELEMENT_TYPE" expression="guessElementType(collection)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="list2Map-4" value="Map&lt;Integer, List&lt;$ELEMENT_TYPE$&gt;&gt; map = $collection$.stream().collect(Collectors.groupingBy($ELEMENT_TYPE$::getX));&#10;" description="以某个属性分组" toReformat="true" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <variable name="ELEMENT_TYPE" expression="guessElementType(collection)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ydf@ActionHelper" value="ActionHelper helper = ActionHelper.of(billContext);" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ydf@ActionHelper.msg" value="ActionHelper.setSuccessMsg(billContext,&quot;&quot;);" description="" toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ydf@ActionHelper.res" value="ActionHelper.setResult(billContext,);" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_EXPRESSION" value="true" />
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ydf@Action" value="@Slf4j&#10;@Component&#10;@BillAction(actionCode = &quot;$CLASS$&quot;, actionName = &quot;$CLASS$&quot;, busiObj = &quot;&quot;)" description="" toReformat="false" toShortenFQNames="true">
+    <variable name="CLASS" expression="className()" defaultValue="&quot;&quot;" alwaysStopAt="false" />
+    <context>
+      <option name="JAVA_DECLARATION" value="true" />
+    </context>
+  </template>
+  <template name="useTime1" value="long startTime = System.currentTimeMillis();&#10;$SELECTION$&#10;log.info(&quot;耗时：{}&quot;,System.currentTimeMillis() - startTime);" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="useTime2-2" value="myStopWatch.start(&quot;-&quot;);&#10;$SELECTION$&#10;myStopWatch.stop();" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="useTime2-1" value="MyStopWatch myStopWatch = MyStopWatch.of(&quot;xyz&quot;);&#10;myStopWatch.start(&quot;-&quot;);&#10;$SELECTION$&#10;myStopWatch.stop();&#10;myStopWatch.prettyPrint();" description="" toReformat="true" toShortenFQNames="true">
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="ydf@QuerySchema" value="QuerySchema querySchema = QuerySchema.create()&#10;        .addSelect(&quot;*&quot;)&#10;        .appendQueryCondition(QueryCondition.name().in())&#10;        .appendQueryCondition(QueryCondition.name().eq())&#10;        ;&#10;&#10;List&lt;IBillDO&gt; billDOs = this.iBaseBusiObjRepository.queryBySchema(querySchema);&#10;if (CollectionUtils.isEmpty(billDOs)) {&#10;    return Collections.EMPTY_LIST;&#10;}&#10;&#10;$returnType$ $var$ = billDOs.stream().map(one-&gt;($TYPE$)one).collect(Collectors.toList());&#10;return $var$;" description="" toReformat="true" toShortenFQNames="true">
+    <variable name="returnType" expression="methodReturnType()" defaultValue="List" alwaysStopAt="false" />
+    <variable name="var" expression="suggestVariableName()" defaultValue="res" alwaysStopAt="false" />
+    <variable name="TYPE" expression="guessElementType(var)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="isEmptyReturn" value="if (CollectionUtils.isEmpty($collection$)){&#10;     return Collections.emptyList();&#10;}" description="if empty return EMPTY_LIST" toReformat="false" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="forEach4List" value="$LIST$.forEach($var$ -&gt; {&#10;    &#10;});" description="list.forEach()" toReformat="true" toShortenFQNames="true">
+    <variable name="LIST" expression="variableOfType(&quot;java.util.List&quot;)" defaultValue="" alwaysStopAt="true" />
+    <variable name="var" expression="suggestVariableName()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="forEach4Map" value="$MAP$.forEach((k,v) -&gt; {&#10;            &#10;});" description="map.forEach()" toReformat="true" toShortenFQNames="true">
+    <variable name="MAP" expression="variableOfType(&quot;java.util.Map&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="isBlank" value="if (StringUtils.isBlank($VAR$)) {&#10;    &#10;}" description="use StringUtils.isBlank()" toReformat="false" toShortenFQNames="true">
+    <variable name="VAR" expression="variableOfType(&quot;java.lang.String&quot;)" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+  <template name="stream" value="StreamKit.x($collection$)" description="StreamKit" toReformat="true" toShortenFQNames="true">
+    <variable name="collection" expression="iterableVariable()" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="JAVA_STATEMENT" value="true" />
+    </context>
+  </template>
+</templateSet>

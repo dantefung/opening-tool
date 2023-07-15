@@ -1,0 +1,71 @@
+" 编码
+set encoding=utf-8
+
+" 不和 vi 兼容
+set nocompatible
+
+" 备份和撤销文件
+set nobackup
+set noswapfile
+
+
+if has('persistent_undo')
+set undofile
+set undodir=~/.vim/undodir
+if !isdirectory(&undodir)
+call mkdir(&undodir, 'p', 0700)
+endif
+endif
+
+" 中文
+set fileencodings=ucs-bom,utf-8,gb18030,latin1,gbk,gb2312,cp936
+set termencoding=utf-8
+
+" 鼠标支持
+if has('mouse')
+if has('gui_running') || (&term =~ 'xterm' && !has('mac'))
+set mouse=a
+else
+set mouse=nvi
+endif
+endif
+
+" 共享剪贴板
+set clipboard=unnamed
+
+" 查找
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+
+nnoremap :nohlsearch
+inoremap :nohlsearch
+
+set scrolloff=1
+
+"==========================================
+" 显示设置
+"==========================================
+" 显示行号
+set number
+set rnu
+
+" 设置缩进
+set shiftwidth=2
+set tabstop=2
+
+" 突出显示当前行
+set cursorline
+
+" 启动 vim 时关闭折叠代码
+set nofoldenable
+
+" 背景透明
+hi Normal ctermfg=252 ctermbg=none
+
+" 将字体设置为Meslo LG S DZ Regular for Powerline 13号大小
+set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline:h13
+
+set laststatus=2 " 必须设置为2,否则状态栏不显示
+set t_Co=256 " 开启256颜色之后，colorschema在vim里好看了许多

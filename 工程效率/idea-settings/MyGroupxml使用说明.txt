@@ -1,8 +1,0 @@
-导出导入 Live Templates 的小技巧
-个人配置好常用功能后，可以共享给团队内其他同学使用。这时其他同学手动导入共享的 xml 文件后重启 Idea 即可——放到在 Idea 安装配置目录（比如：./IntelliJIdea2022/templates，无 templates 文件夹的，创建一个便可）。
-由于系统不同、IDEA 版本不同，所以这个 /templates 文件夹位置并不太好找。尽管 IDEA 官方给了各目录说明：
-1https://www.jetbrains.com/help/idea/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html
-
-技巧：比如按照图 1 先建一个名称为 MyGroup Template Group，且在其下随便新建一个 Live Template，然后在系统盘中搜索 MyGroup 即可找到对应所在目录。
-其它更多可进一步参考官方说明：
-1https://www.jetbrains.com/help/idea/using-live-templates.html#live_templates_types
