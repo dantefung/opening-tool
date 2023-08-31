@@ -1,0 +1,170 @@
+" 编码
+set encoding=utf-8
+
+" 不和 vi 兼容
+set nocompatible
+
+" 备份和撤销文件
+set nobackup
+set noswapfile
+
+
+if has('persistent_undo')
+set undofile
+set undodir=~/.vim/undodir
+if !isdirectory(&undodir)
+call mkdir(&undodir, 'p', 0700)
+endif
+endif
+
+" 中文
+set fileencodings=ucs-bom,utf-8,gb18030,latin1,gbk,gb2312,cp936
+set termencoding=utf-8
+
+" 鼠标支持
+if has('mouse')
+if has('gui_running') || (&term =~ 'xterm' && !has('mac'))
+set mouse=a
+else
+set mouse=nvi
+endif
+endif
+
+" 共享剪贴板
+set clipboard=unnamed
+
+" 查找
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+
+nnoremap <silent> <F2>      :nohlsearch<CR>
+inoremap <silent> <F2> <C-O>:nohlsearch<CR>
+
+nnoremap :nohlsearch
+inoremap :nohlsearch
+
+" 组合快捷键：nnoremap是什么意思？——简单来说，nnoremap将一个组合快捷键映射为另一个快捷键。no部分，指的是在Vim的正常模式（Normal Mode）下，而不是可视模式下重新映射
+nnoremap <C-J> <C-W><C-J>    " 组合快捷键：- Ctrl-j 切换到下方的分割窗口
+nnoremap <C-K> <C-W><C-K>    " 组合快捷键：- Ctrl-k 切换到上方的分割窗口
+nnoremap <C-L> <C-W><C-L>    " 组合快捷键：- Ctrl-l 切换到右侧的分割窗口
+nnoremap <C-H> <C-W><C-H>    " 组合快捷键：- Ctrl-h 切换到左侧的分割窗口
+
+
+set scrolloff=1
+
+"==========================================
+" 显示设置
+"==========================================
+" 显示行号
+set number
+set rnu
+
+" 设置缩进
+set shiftwidth=2
+set tabstop=2
+
+" 突出显示当前行
+set cursorline
+
+" 启动 vim 时关闭折叠代码
+set nofoldenable
+
+" 主题
+syntax enable
+colorscheme molokai
+set background=dark
+
+" 背景透明
+hi Normal ctermfg=252 ctermbg=none
+
+" 将字体设置为Meslo LG S DZ Regular for Powerline 13号大小
+set guifont=Meslo\ LG\ S\ DZ\ Regular\ for\ Powerline:h13
+
+set laststatus=2 " 必须设置为2,否则状态栏不显示
+set t_Co=256 " 开启256颜色之后，colorschema在vim里好看了许多
+
+"==========================================
+" vim-plug 需要安装, 否则注释掉以下的插件声明
+"==========================================
+call     plug#begin('~/.vim/plugged')
+
+" 彩虹括号
+Plug 'luochen1990/rainbow'
+
+" -----------------------------------------------
+" 树形目录
+" -----------------------------------------------
+Plug 'scrooloose/nerdtree'                            " https://github.com/preservim/nerdtree
+Plug 'jistr/vim-nerdtree-tabs'                        " https://github.com/jistr/vim-nerdtree-tabs
+Plug 'Xuyuanp/nerdtree-git-plugin'                    " https://github.com/Xuyuanp/nerdtree-git-plugin
+Plug 'ryanoasis/vim-devicons'                         " https://github.com/ryanoasis/vim-devicons
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'        " https://github.com/tiagofumo/vim-nerdtree-syntax-highlight
+Plug 'tpope/vim-eunuch'                               " https://github.com/tpope/vim-eunuch
+
+
+map <C-n> :NERDTreeToggle<CR>
+
+
+let NERDTreeMinimalUI = 1
+let NERDTreeShowHidden = 1
+
+
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+
+" 开发的过程中，我们希望git信息直接在NERDTree中显示出来， 和Eclipse一样，修改的文件和增加的文件都给出相应的标注， 这时需要安装的插件就是 nerdtree-git-plugin,配置信息如下
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+" open nerdtree with the current file selected
+nmap ,t :NERDTreeFind<CR>
+
+" i 在新的水平分割的窗口中打开
+" s 在新的竖直分割的窗口中打开
+" t 在标签页中打开
+" go 预览文件
+" r 刷新光标所在的目录
+" R 刷新当前根路径
+" I 显示隐藏文件
+" m 显示文件操作菜单
+" C 将根路径设置为光标所在的目录
+" u 设置上级目录为根路径
+" gT 前一个 tab
+" gt 后一个 tab
+" <C-W> 加方向键（h、j、k、l、<Left> 等）可以在窗口之间跳转
+" <C-W> + w 跳转到下一个窗口
+" <C-W> + s 和 :split 作用相同，把当前窗口横向一分为二
+" <C-W> + v 和 :vsplit 作用相同，把当前窗口纵向一分为二
+" <C-W> + o 或 :only 只保留当前窗口，关闭其他所有窗口
+
+
+" -----------------------------------------------
+" 状态条
+" -----------------------------------------------
+Plug 'vim-airline/vim-airline'                        " https://github.com/vim-airline/vim-airline
+Plug 'vim-airline/vim-airline-themes'                 " https://github.com/vim-airline/vim-airline-themes
+
+
+let g:airline_theme='molokai'
+let g:airline_powerline_fonts = 1
+
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#nerdtree_statusline = 0
+let g:airline_section_c = ''
+
+call plug#end()
