@@ -24,4 +24,5 @@ Markdown Image Support
 Api Generator Plus
 YapiUpload
 Idea Yapi
+Smart Input
 
