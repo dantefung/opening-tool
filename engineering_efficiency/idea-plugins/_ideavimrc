@@ -87,7 +87,10 @@ nnoremap U <C-r>
 
 " 以下是自定义快捷键-----------------
 
+
 " 指定寄存器
+nnoremap <Leader>0 "0
+nnoremap <Leader>1 "1
 nnoremap <Leader>2 "2
 nnoremap <Leader>3 "3
 nnoremap <Leader>4 "4
