@@ -18,3 +18,9 @@ return
 #l::
 Send {Right}
 return
+
+;; win + . 映射为 alt + . idea中跳转到下一个错误
+#.::!.
+
+;; + 表示与其他键组合是的Shift键 shift + win + . 映射为 shift + alt + .  idea中跳转上一个错误
++#.::+!.
