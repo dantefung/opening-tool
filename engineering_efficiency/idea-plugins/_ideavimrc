@@ -87,6 +87,20 @@ nnoremap U <C-r>
 
 " 以下是自定义快捷键-----------------
 
+
+" 指定寄存器
+nnoremap <Leader>0 "0
+nnoremap <Leader>1 "1
+nnoremap <Leader>2 "2
+nnoremap <Leader>3 "3
+nnoremap <Leader>4 "4
+nnoremap <Leader>5 "5
+nnoremap <Leader>6 "6
+
+
+" 指定寄存器删除
+nnoremap <Leader>dd "1dd
+
 " 复制单个单词到寄存器a并标记到o (使用快捷键 空格+y)
 " 注释:（mo => 标记o）,(+yiw =>复制当前单词到系统剪切板),("a => 寄存器a) ,("ayiw => 复制当前单词到寄存器a)
 nnoremap <Leader>y mo"+yiw"ayiw

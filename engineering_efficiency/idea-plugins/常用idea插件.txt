@@ -21,5 +21,8 @@ Auto filling Java call arguments
 Custom Postfix Templates
 Java8 Postifx
 Markdown Image Support
-
+Api Generator Plus
+YapiUpload
+Idea Yapi
+Smart Input
 
