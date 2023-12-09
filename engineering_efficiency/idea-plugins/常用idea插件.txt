@@ -1,6 +1,8 @@
 AceJump
 Easy Code
 EasyYapi
+Easy Javadoc
+Easy Generate
 EnumGenerator
 GenerateO2O
 GenerateAllSetter
