@@ -103,7 +103,7 @@ nnoremap <Leader>a "a
 nnoremap <Leader>dd "1dd
 
 " 跳到当前类名处
-nnoremap <Leader>cs Gk%0ww
+nnoremap <Leader>cls Gk%0ww
 nnoremap <Leader>css G%0ww
 
 
