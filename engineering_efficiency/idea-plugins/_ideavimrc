@@ -96,10 +96,16 @@ nnoremap <Leader>3 "3
 nnoremap <Leader>4 "4
 nnoremap <Leader>5 "5
 nnoremap <Leader>6 "6
+nnoremap <Leader>a "a
 
 
 " 指定寄存器删除
 nnoremap <Leader>dd "1dd
+
+" 跳到当前类名处
+nnoremap <Leader>cs Gk%0ww
+nnoremap <Leader>css G%0ww
+
 
 " 复制单个单词到寄存器a并标记到o (使用快捷键 空格+y)
 " 注释:（mo => 标记o）,(+yiw =>复制当前单词到系统剪切板),("a => 寄存器a) ,("ayiw => 复制当前单词到寄存器a)
