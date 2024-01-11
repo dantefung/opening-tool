@@ -89,7 +89,7 @@ nnoremap U <C-r>
 
 " 使用 Vim 时候，通过 viwy 或者 yy 等复制操作之后，p 操作粘贴的时候，只能粘贴一次，想要粘贴多次怎么办？
 " 寄存器位置 0 的地方存放的就是最近复制的内容。
-nnoremap p "0p
+vnoremap p "0p
 
 " 指定寄存器
 nnoremap <Leader>0 "0
