@@ -58,6 +58,10 @@ vnoremap v <Esc>
 " Redo
 nnoremap U <C-r>
 
+" 左右滑动滚动条
+nnoremap <C-h> zH
+nnoremap <C-l> zL
+
 " 以下是一些vim使用方法 -----------------
 " viw  vaw  ciw caw diw daw vi' va' ci' ca' di' da' vi( va( ci( ca( di( da( ...
 
@@ -106,6 +110,8 @@ nnoremap <Leader>dd "1dd
 nnoremap <Leader>cls Gk%0ww
 nnoremap <Leader>css G%0ww
 
+" 跳到当前行的变量处, 例如:  Object obj = new Object(), 期望跳跃到 obj处
+nnoremap <Leader>gv
 
 " 复制单个单词到寄存器a并标记到o (使用快捷键 空格+y)
 " 注释:（mo => 标记o）,(+yiw =>复制当前单词到系统剪切板),("a => 寄存器a) ,("ayiw => 复制当前单词到寄存器a)
