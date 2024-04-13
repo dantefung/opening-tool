@@ -28,3 +28,4 @@ YapiUpload
 Idea Yapi
 Smart Input
 FuDoc
+Doc View
