@@ -115,6 +115,8 @@ nnoremap <Leader>css G%0ww
 
 " 跳到当前行的变量处, 例如:  Object obj = new Object(), 期望跳跃到 obj处
 nnoremap <Leader>gv 0ww
+" 跳到当前行的方法名处
+nnoremap <Leader>gm 0f(h
 
 " 复制单个单词到寄存器a并标记到o (使用快捷键 空格+y)
 " 注释:（mo => 标记o）,(+yiw =>复制当前单词到系统剪切板),("a => 寄存器a) ,("ayiw => 复制当前单词到寄存器a)
