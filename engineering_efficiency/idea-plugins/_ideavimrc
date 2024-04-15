@@ -114,7 +114,7 @@ nnoremap <Leader>cls Gk%0ww
 nnoremap <Leader>css G%0ww
 
 " 跳到当前行的变量处, 例如:  Object obj = new Object(), 期望跳跃到 obj处
-nnoremap <Leader>gv 0ww
+nnoremap <Leader>gv 0f=3h
 " 跳到当前行的方法名处
 nnoremap <Leader>gm 0f(h
 
