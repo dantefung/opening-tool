@@ -256,3 +256,9 @@ nnoremap <Leader>pm :action ShowPopupMenu<CR>
 
 "正常启动工程
 nnoremap <Leader>rc :action ChooseRunConfiguration<CR>
+
+" 复制类的全限定名
+" nnoremap <Leader>cr :action CopyReference<CR>
+"
+" " 
+" nnoremap <Leader>sw :action SurroundWith<CR>
