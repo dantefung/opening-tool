@@ -258,7 +258,7 @@ nnoremap <Leader>pm :action ShowPopupMenu<CR>
 nnoremap <Leader>rc :action ChooseRunConfiguration<CR>
 
 " 复制类的全限定名
-" nnoremap <Leader>cr :action CopyReference<CR>
-"
-" " 
-" nnoremap <Leader>sw :action SurroundWith<CR>
+nnoremap <Leader>cr :action CopyReference<CR>
+
+" 相当于IDEA的快捷键 ctrl+alt+T 
+nnoremap <Leader>sw :action SurroundWith<CR>
