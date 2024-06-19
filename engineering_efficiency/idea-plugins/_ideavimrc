@@ -285,3 +285,6 @@ nmap <leader>sp <action>(ParameterInfo)
 
 " 查看文档  F1键
 nnoremap <Space>sh :action QuickJavaDoc<CR>
+
+" 窗口切换 Ctrl + tab
+nnoremap <Space><TAB> :action Switcher<CR>
