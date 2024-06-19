@@ -147,8 +147,6 @@ nnoremap <Leader>l <S-l>zz
 
 " 以上是自定义快捷键-----------------
 
-" quit ==> close current window
-nnoremap <Leader>q <C-W>w
 
 " Window operation
 " (关于窗口操作)
