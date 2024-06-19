@@ -274,3 +274,6 @@ nmap <leader>sb <action>(ShowBookmarks)
 "用于显示方法或函数的参数信息(Ctrl + p)
 let g:WhichKeyDesc_Show_ParameterInfo = "<leader>sp 显示方法或函数的参数信息"
 nmap <leader>sp <action>(ParameterInfo)
+
+" 查看文档  F1键
+nnoremap <Space>sh :action QuickJavaDoc<CR>
