@@ -28,6 +28,12 @@ set clipboard=unnamed
 set keep-english-in-normal 
 set keep-english-in-normal-and-restore-in-insert
 
+" gh=go head, 映射vim中的^
+nnoremap gh ^
+" gl=go last，映射vim中的$
+nnoremap gl $
+
+
 " clear the highlighted search result
 " (清除高亮)
 nnoremap <Leader>sc :nohlsearch<CR>
