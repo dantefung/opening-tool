@@ -260,3 +260,17 @@ nnoremap <Leader>cr :action CopyReference<CR>
 
 " 相当于IDEA的快捷键 ctrl+alt+T 
 nnoremap <Leader>sw :action SurroundWith<CR>
+
+"set which-key
+
+"显示当前打开文件的文件结构弹出窗口，其中包含文件中的类、方法、字段等结构(Alt + 7)
+let g:WhichKeyDesc_Show_FileStructure = "<leader>ss 显示文件结构"
+nmap <leader>ss <action>(FileStructurePopup)
+
+"显示书签（Bookmarks）工具窗口，其中包含当前文件中设置的书签列表(Ctrl + F11)
+let g:WhichKeyDesc_Show_Bookmarks = "<leader>sb 显示书签工具窗口"
+nmap <leader>sb <action>(ShowBookmarks)
+
+"用于显示方法或函数的参数信息(Ctrl + p)
+let g:WhichKeyDesc_Show_ParameterInfo = "<leader>sp 显示方法或函数的参数信息"
+nmap <leader>sp <action>(ParameterInfo)
