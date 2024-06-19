@@ -156,7 +156,9 @@ nnoremap <Leader>l <S-l>zz
 
 " Window operation
 " (关于窗口操作)
+" 切换窗口
 nnoremap <Leader>ww <C-W>w
+" 关闭窗口
 nnoremap <Leader>wd <C-W>c
 nnoremap <Leader>wj <C-W>j
 nnoremap <Leader>wk <C-W>k
